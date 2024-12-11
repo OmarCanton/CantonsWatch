@@ -1,0 +1,1109 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Maps&display=swap');
+:root{
+    --blueColor: rgb(13, 170, 243);
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    cursor: default;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.overlayContainer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(27, 27, 27);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: grey;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    font-weight: bold;
+    z-index: 3;
+    pointer-events: none;
+    text-align: center;
+
+    & .text2{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 300%;
+        color: rgb(161, 161, 161);
+        gap: 10px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    & .text1{
+        position: relative;
+        font-weight: bold;
+        font-size: 250%;
+        text-transform: uppercase;
+    }
+    & .text4{
+        font-size: medium;
+        font-weight: normal;
+        position: relative;
+        top: 50px;
+    }
+}
+@media (max-width: 425px){
+    .overlayContainer .text1{
+        font-size: 135%;
+    }
+    .overlayContainer .text2{
+        font-size: 170%;
+        & img{
+            width: 80px;
+            height: 40px;
+        }
+    }
+    .overlayContainer .text3{
+        font-size: 80%;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .overlayContainer .text4{
+        font-size: small;
+    }
+}
+.overlayShow{
+    opacity: 0;
+    animation: animateOverlay 2s alternate;
+}
+@keyframes animateOverlay{
+    from{
+        opacity: 1;
+        transform: translateX(-100px);
+    }
+    30%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+    90%{
+        opacity: 1;
+        transform: translateX(-60%);
+    }
+    to{
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+.downloadScreen{
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    background-color: rgb(27, 27, 27);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transform: translateX(90%);
+}
+.downloadScreen div{
+    position: relative;
+    top: -20%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.closeDownloadScreen{
+    position: absolute;
+    height: 1.3rem;
+    width: 1.3rem;
+    top: 30%;
+    right: 10%;
+    fill: grey;
+    cursor: pointer;
+}
+.downloadScreen div input{
+    font-size: medium;
+    outline: none;
+    padding: 20px;
+    width: 350px;
+    height: 30px;
+    border-radius: 3px;
+    border: none;
+    background-color: rgb(235, 235, 235);
+}
+@media (max-width: 320px){
+    .downloadScreen div input{
+        width: 100px;
+    }
+}
+.downloadScreen div button{
+    padding: 10px;
+    outline: none;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: orangered;
+    color: white;
+    border: none;
+    width: 100px;
+    transition: all 0.15s;
+}
+.downloadScreen div button:active{
+    background-color: rgb(255, 118, 68);
+}
+.downloadScreenShowJS{
+    opacity: 1 !important;
+    pointer-events: all !important;
+    transform: translateX(0) !important;
+}
+.videoContainer {
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+    background-color: rgb(31, 30, 30);
+    display: flex;
+    flex-direction: column;
+}
+.videoContainer .header{
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    width: 100%;
+    height: 12%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(31, 30, 30);
+    padding-left: 20px;
+    padding-right: 30px;
+    transition: all 0.2s;
+}
+.videoContainer .header div{
+    cursor: pointer;
+}
+.videoContainer .header svg{
+    height: 1.8rem;
+    width: 1.8rem;
+    fill: white;
+}
+.videoContainer .header .arrow{
+    margin-top: 10px;
+    cursor: pointer;
+}
+.clearPlaylist{
+    border: 1px solid grey;
+    padding: 7px;
+    color: grey;
+    border-radius: 5px;
+    transition: all 0.25s;
+    cursor: pointer;
+    position: absolute;
+    right: 10%;
+    opacity: 0;
+    pointer-events: none;
+}
+.clearPlaylistShowJS{
+    opacity: 1 !important;
+    pointer-events: all !important;
+}
+.clearPlaylist:hover{
+    color: white;
+    background-color: red;
+    border: 1px solid red;
+}
+.clearPlaylist:active{
+    scale: 0.9;
+}
+.videoContainer .header .playerName {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 210%;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+}
+.watch{
+    font-family: 'Rubik Maps', system-ui;
+    color: orange;
+}
+.cantons{
+    font-family: 'Rubik Maps', system-ui;
+    color: var(--blueColor);
+}
+.animatelogoJS{
+    animation: animateLogo 3s;
+}
+@keyframes animateLogo {
+    from{
+        transform: scale(1);
+    }
+    5%{
+        transform: scale(1.5);
+    }
+    30%{
+        transform: scale(1);
+    }
+    35%{
+        transform: rotate(-20deg);
+    }
+    65%{
+        transform: rotate(20deg);
+    }
+    90%{
+        transform: scale(1.5);
+    }
+    to{
+        transform: scale(1) rotate(0);
+    }
+}
+.profile{
+    display: flex;
+    color: grey;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.profileSVG:active{
+    scale: 0.5;
+    transition: all 0.5s;
+}
+.videoContainer .sideMain {
+    width: 100%;
+    height: 88%;
+    display: flex;
+}
+.videoContainer .sideMain .sideBar {
+    width: 13%;
+    padding: 20px;
+    height: 88vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    background-color: rgb(31, 30, 30);
+    border-bottom-left-radius: 20px;
+    overflow: scroll;
+    fill: white;
+    color: white;
+    transition: all 0.35s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.sideBarShowHamburgerJS{
+    width: 100%;
+    height: 200px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 25px;
+    background-color: rgb(31, 30, 30);
+    border-bottom-left-radius: 20px;
+    overflow: scroll;
+    fill: white;
+    color: white;
+    transition: all 0.35s cubic-bezier(0.075, 0.82, 0.165, 1);
+    position: absolute;
+    top: 13%;
+    right: 0;
+    left: 0;
+}
+.sideBarJS{
+    width: 0 !important;
+    padding: 0 !important;
+}
+.videoContainer .sideMain .sideBar a{
+    color: var(--blueColor);
+}
+.videoContainer .sideMain .sideBar::-webkit-scrollbar{
+    width: 0;
+}
+.videoContainer .sideMain .sideBar svg{
+    height: 2.3rem;
+    width: 2.3rem;
+    transition: all 0.8s;
+}
+.videoContainer .sideMain .sideBar div:not(:last-child) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    transition: background-color 0.15s;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 5px;
+}
+.home:active svg, .addToLibraryContainer:active svg, .settings:active svg, .downloadBtnContainer:active svg{
+    scale: 0.5;
+}
+.videoContainer .sideMain .sideBar .home:hover{
+    background-color: rgba(0, 0, 0, 0.774);
+}
+.videoContainer .sideMain .sideBar .addToLibraryContainer:hover{
+    background-color: rgba(0, 0, 0, 0.774);
+}
+.downloadBtnContainer:hover{
+    background-color: rgba(0, 0, 0, 0.774);
+}
+.videoContainer .sideMain .sideBar .addToLibraryContainer:hover .addToLibraryText{
+    color: white;
+}
+.addToLibraryText{
+    color: grey;
+    text-align: center;
+}
+.playbackOptions{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -5px;
+}
+.videoContainer .sideMain .sideBar .playbackOptions .playbackOptionsText{
+    color: grey;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -5px;
+}
+.videoContainer .sideMain .sideBar .downloadBtnContainer .downloadText{
+    color: grey;
+    text-align: center;
+    position: relative;
+    top: 5px;
+}
+.videoContainer .sideMain .sideBar .playbackOptions .playbackIcons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 10px;
+    gap: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid grey;
+    padding-bottom: 10px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    position: relative;
+    left: -40px;
+}
+.videoContainer .sideMain .sideBar .playbackOptions .playbackIcons svg:active{
+    scale: 0.5;
+}
+.playbackShowJS{
+    left: 0 !important;
+    opacity: 1 !important;
+    pointer-events: all !important;
+}
+.videoContainer .sideMain .sideBar .settings:hover{
+    background-color: rgba(0, 0, 0, 0.774);
+}
+.settingstext{
+    color: grey;
+}
+.videoContainer .sideMain .sideBar .settings:hover .settingstext{
+    color: white;
+}
+.hometext{
+    color: grey;
+}
+.videoContainer .sideMain .sideBar .home:hover .hometext{
+    color: white;
+}
+.videoContainer .sideMain .sideBar .share {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    top: -40%;
+    transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.videoContainer .sideMain .sideBar .share .shareText{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -5px;
+}
+.videoContainer .sideMain .sideBar .share .socialMediaShareIcons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 10px;
+    gap: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid grey;
+    padding-bottom: 10px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    position: relative;
+    left: -40px;
+}
+.shareShowJS{
+    left: 0 !important;
+    opacity: 1 !important;
+    pointer-events: all !important;
+}
+.videoContainer .sideMain .sideBar .share .socialMediaShareIcons svg:active{
+    transform: scale(0.5);
+}
+.videoContainer .sideMain .sideBar .settings{
+    position: relative;
+    top: -100%;
+    transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.videoContainer .sideMain .sideBar .info{
+    color: grey;
+    position: relative;
+    top: -100%;
+    transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    text-align: center;
+}
+
+.videoContainer .sideMain .sideBar .share .socialMediaShareIcons svg{
+    height: 2rem;
+    width: 2rem;
+}
+.videoContainer .sideMain .sideBar .share .socialMediaShareIcons svg:nth-child(1){
+    fill: var(--blueColor);
+}
+.videoContainer .sideMain .sideBar .share .socialMediaShareIcons svg:nth-child(2){
+    fill: yellow;
+}
+.videoContainer .sideMain .sideBar .share .socialMediaShareIcons svg:nth-child(3){
+    fill: rgb(10, 161, 10);
+}
+.videoContainer .sideMain .sideBar .share .socialMediaShareIcons svg:nth-child(4){
+    fill: rgb(253, 109, 109);
+}
+.videoContainer .sideMain .sideBar .share .socialMediaShareIcons svg:nth-child(5){
+    fill: var(--blueColor);
+}
+.videoContainer .sideMain .sideBar .share .socialMediaShareIcons svg:nth-child(6){
+    fill: black;
+}
+.videoContainer .sideMain .playlistContainer{
+    background-color: rgb(78, 78, 78);
+    width: 87%;
+    height: 100%;
+    border-radius: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 5px;
+    padding-left: 5px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    overflow: scroll;
+    box-shadow: inset 0 0 20px 6px rgb(29, 29, 29);
+    transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.playlistContainerJS{
+    width: 100% !important;
+    justify-content: center;
+}
+.videoContainer .sideMain .playlistContainer::-webkit-scrollbar{
+    width: 0;
+}
+.playlistContainer img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 95%;
+    scale: 0.8;
+    filter: contrast(0.1) grayscale();
+}
+.animateNoVideoImageJS{
+    animation: flipIt 3s alternate cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+@keyframes flipIt {
+    from{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(0.7);
+    }
+    to{
+        transform: scale(1);
+    }
+}
+.playlistContainer #oops{
+    height: 1%;
+    text-align: center;
+}
+/*Added for the elements created using JS*/
+.videoContainer .sideMain .playlistContainer div{
+    display: flex;
+    height: 65%;
+    flex: 0 1 20%;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    flex-direction: column;
+    gap: 5px;
+    color: rgb(175, 175, 175);
+}
+.videoContainer .sideMain .playlistContainer div div{
+    width: 100%;
+    box-shadow: 0px 5px 20px -10px black;
+    border: none;
+}
+.videoContainer .sideMain .playlistContainer div video{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    box-shadow: 0px 5px 20px -5px black;
+    border: none;
+    cursor: pointer;
+}
+.videoContainer .sideMain .playlistContainer div span{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.videoContainer .sideMain .playlistContainer div span p{
+    text-overflow: ellipsis;
+    overflow: scroll;
+    width: 365px;
+    display: flex;
+    align-items: center;
+    color: rgb(175, 175, 175);
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.videoContainer .sideMain .playlistContainer div p::-webkit-scrollbar{
+    width: 0;
+}
+/*Move up and Down*/
+.movedown{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: aqua;
+    box-shadow: 0 4px 9px 0 black;
+    position: absolute;
+    bottom: 50px;
+    right: 10px;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    z-index: 2321;
+    opacity: 0;
+    pointer-events: none;
+    cursor: pointer;
+    transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.movedownShowJS{
+    opacity: 1 !important;
+    pointer-events: all !important;
+}
+.movedown svg {
+    height: 1.2rem;
+    width: 1.2rem;
+}
+/*Video player*/
+.videoPlayer{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(27, 27, 27);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 20px;
+    transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    scale: 0.05;
+    pointer-events: none;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    outline: none;
+    color: white;
+    z-index: 2322;
+}
+.videoPlayer video{
+    height: 85%;
+    width: 85%;
+    border-radius: 35px;
+    object-fit: cover;
+    outline: none;
+    transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.videoFullScreenJS{
+    height: 100% !important;
+    width: 100% !important;
+}
+.videoName{
+    border: none;
+    outline: none;
+    width: 80%;
+    height: fit-content;
+    color: white;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    font-size: 150%;
+    font-weight: 500;
+}
+.videoNameNotShowJS{
+    display: none !important;
+}
+.videoPlayerSlideDown-closeVideoPlayerDisappearJS{
+    display: none !important;
+}
+.playbackControlsDisappearBackground{
+    top: 79.5% !important;
+    border-radius: 15px !important;
+}
+.closeAndDown{
+    position: absolute;
+    top: 5%;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-right: 40px;
+    padding-left: 40px;
+    opacity: 1;
+    pointer-events: all;
+}
+.closeAndDownDisappearJS{
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+#videoPLayerMoveDown{
+    left: 8%;
+    top: 5%;
+    height: 1.3rem;
+    width: 1.3rem;
+    fill: lightgrey;
+    cursor: pointer;
+}
+#closeVideoPlayer{
+    right: 8%;
+    top: 5%;
+    height: 1.3rem;
+    width: 1.3rem;
+    fill: lightgrey;
+    cursor: pointer;
+}
+.showVideoPlayerJS{
+    pointer-events: all !important;
+    scale: 1 !important;
+    opacity: 1 !important;
+}
+.videoPlayerSlideDownJS{
+    transform: translateY(91%);
+    box-shadow: 0 0 60px 0 black;
+}
+.playbackControls{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    width: 85%;
+    top: 75.5%;
+    border-bottom-left-radius: 35px;
+    border-bottom-right-radius: 35px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s;
+    backdrop-filter: blur(50px);
+    background-color: rgba(0, 0, 0, 0.377);
+    transition: all 0.25 cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.playbackControls svg:active{
+    scale: 0.8;
+}
+.showPlaybackControls{
+    opacity: 1 !important;
+    pointer-events: all !important;
+}
+.progressBar{
+    width: 90%;
+    height: 10px;
+    background-color: grey;
+    border-radius: 50px;
+}
+.seekBar{
+    border-radius: 50px;
+    background-color: lightgrey;
+}
+.startEndDuration{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: lightgrey;
+    position: relative;
+    top: 10px;
+}
+.prevPlayForw{
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    bottom: 10px;
+}
+.prevPlayForw svg{
+    height: 3.3rem;
+    width: 3.3rem;
+    fill: white;
+    transition: all 0.15s;
+}
+.otherControls{
+    width: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    bottom: 2px;
+}
+.otherControls svg{
+    height: 1.3rem;
+    width: 1.3rem;
+    fill: white;
+    transition: all 0.15s;
+}
+.volumeSlider{
+    position: absolute;
+    bottom: 30%;
+    right: -4.85%;
+    display: flex;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.volumeSliderShowJS{
+    opacity: 1 !important;
+    pointer-events: all !important;
+}
+.controlsMenu{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    left: 10%;
+    gap: 25px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.15s;
+}
+.showControlsMenuJS{
+    opacity: 1 !important;
+    pointer-events: all !important;
+    left: 20% !important;
+}
+.otherControlsNotShownJS{
+    opacity: 0;
+    pointer-events: none;
+}
+.playbackControlsShowJS{
+    opacity: 1 !important;
+    pointer-events: all !important;
+}
+.settingsScreen{
+    border-radius: 20px;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    right: -100%;
+    background-color: rgb(27, 27, 27);
+    z-index: 3000;
+    padding: 30px;
+    color: white;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.settingsScreenShowJS {
+    opacity: 1 !important;
+    pointer-events: all !important;
+    right: 0 !important;
+}
+.closeSettingsScreen{
+    height: 1.3rem;
+    width: 1.3rem;
+    position: absolute;
+    right: 4%;
+    top: 7%;
+    fill: grey;
+    cursor: pointer;
+}
+.themeOptions div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.themeOptions div:hover{
+    background-color: rgba(211, 211, 211, 0.137);
+}
+.themeOptions svg{
+    height: 1.5rem;
+    width: 1.5rem;
+    fill: grey;
+    opacity: 0;
+    transition: all 0.2s;
+}
+.themesBulbShowJS{
+    opacity: 1 !important;
+    fill: orange !important;
+}
+.NightLight{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.NightLight div{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.intensity{
+    color: grey;
+}
+.intensitySet{
+    display: flex;
+    align-items: center;
+}
+.intensitySet input{
+    width: 150px;
+}
+.NightLightOverlay{
+    height: 100%;
+    width: 100%;
+    border: none;
+    border-radius: 20px;
+    background-color: orange;
+    position: fixed;
+    transition: all 0.1s cubic-bezier(0.075, 0.82, 0.165, 1);
+    opacity: 0;
+    pointer-events: none;
+    z-index: -1;
+}
+.NightLightOverlayShowJS{
+    z-index: 9999999 !important;
+}
+/*BRIGHT THEME*/
+.brightThemeJS{
+    background-color: white !important;
+    color: black !important;
+}
+.playlistbackColorBrightThemeJS{
+    background-color: rgb(223, 223, 223) !important;
+    box-shadow: inset 0 0 20px 6px rgb(216, 216, 216) !important;
+}
+.arrowBrightThemeJS {
+    fill: grey !important;
+}
+.profileBrightThemeJS{
+    fill: black !important;
+}
+.sideBarTextJS{
+    color: black !important;
+}
+/*END*/
+/*BLUE_BLACK*/
+.blueBlackThemeJS{
+    background-color: rgb(18, 18, 85) !important;
+}
+.playlistbackColorBlueBlackThemeJS{
+    background-color: rgb(13, 40, 92) !important;
+    box-shadow: inset 0 0 20px 6px rgb(4, 22, 53) !important;
+}
+/*END*/
+.enableDisableNightLight{
+    appearance: none;
+    width: 40px;
+    background-color: white;
+    height: 20px;
+    border: none;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.35s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.enableDisableNightLight::before{
+    content: "";
+    height: 20px;
+    width: 20px;
+    border: none;
+    border-radius: 50%;
+    background-color: orange;
+    scale: 0.8;
+    position: absolute;
+    left: 0;
+    transition: all 0.35s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.enableDisableNightLight:checked{
+    background-color: orange;
+}
+.enableDisableNightLight:checked::before{
+    transform: translateX(calc(40px - 15px));
+    background-color: white;
+}
+.intensitySet{
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.5s;
+}
+.intensitySetShowJS{
+    opacity: 1 !important;
+    pointer-events: all !important;
+}
+.toggleBackColorJS{
+    background-color: rgb(13, 170, 243) !important;
+}
+.removeBacFromVidPlaylist{
+    background-color: orange !important;
+}
+.hamburger{
+    position: fixed;
+    opacity: 0;
+    pointer-events: none;
+    margin-top: 5px;
+}
+
+/*MEDIA QUERIES*/
+@media (max-width: 600px) {
+    .videoContainer .sideMain .sideBar{
+        width: 0%;
+        padding: 0;
+    }
+    .videoContainer .sideMain .playlistContainer{
+        width: 100%;
+    }
+    .videoContainer .header .playerName {
+        font-size: 150%;
+        gap: 2px;
+    }
+    .videoContainer .hearder .arrow{
+        margin-top: -10px;
+    }
+    .videoContainer .header svg {
+        height: 1.6rem;
+        width: 1.6rem;
+    }
+    .arrow{
+        opacity: 0;
+        pointer-events: none;
+    }
+    .hamburger{
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+@media (max-width: 420px) {
+    .videoContainer .header .playerName {
+        font-size: 145%;
+        gap: 2px;
+    }
+} 
+@media (max-width: 399px) {
+    .videoContainer .header {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}
+@media (max-width: 341px) {
+    .videoContainer .header {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .videoContainer .header .playerName {
+        font-size: 130%;
+    } 
+}
+@media (min-width: 601px) {
+    .videoContainer .sideMain .sideBar {
+        width: 20%;
+    }
+
+}
+@media (min-width: 1024px){
+    .videoContainer .sideMain .sideBar {
+        width: 13%;
+    }
+}
+@media (min-width: 1024px ) and (max-width: 1169px) {
+    .videoContainer .sideMain .sideBar {
+        width: 19%;
+    }
+}
+@media (min-width: 601px) and (max-width: 810px) {
+    .videoContainer .sideMain .sideBar .playbackOptions .playbackOptionsText, .videoContainer .sideMain .sideBar .share .shareText{
+        flex-direction: column;
+    }    
+}
+@media (max-width: 488px) {
+    .videoContainer .sideMain .sideBar .playbackOptions .playbackOptionsText{
+        flex-direction: column;
+    }
+}
+@media (max-width: 378px) {
+    .videoContainer .sideMain .sideBar .share .shareText {
+        flex-direction: column;
+    }
+}
+@media (max-width: 403px) {
+    .addToLibraryText{
+        text-align: center;
+    }
+}
+@media (max-width: 789px) {
+    .clearPlaylist{
+        border: none;
+        padding: 0;
+        bottom: 0;
+        left: 150px;
+        width: fit-content;
+        color: rgba(221, 73, 73, 0.753);
+    }
+}
